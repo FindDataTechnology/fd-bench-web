@@ -1,0 +1,142 @@
+{
+  "communities": {
+    "0": [
+      "src_pages_index",
+      "src_pages_index_done",
+      "src_pages_index_esc",
+      "src_pages_index_fallback",
+      "src_pages_index_num",
+      "src_pages_index_pick",
+      "src_pages_index_readcounts",
+      "src_pages_index_renderfail",
+      "src_pages_index_renderoverview",
+      "src_pages_index_tierchip"
+    ],
+    "1": [
+      "asyncio",
+      "json",
+      "pathlib",
+      "playwright_async_api",
+      "scripts_site_inspect",
+      "scripts_site_inspect_main",
+      "scripts_site_inspect_rationale_1",
+      "sys"
+    ],
+    "2": [
+      "fontsource_noto_sans_sc",
+      "fontsource_noto_serif_sc",
+      "package_dependencies_fontsource_noto_sans_sc",
+      "ref_fontsource_noto_sans_sc",
+      "src_layouts_layout",
+      "src_styles_global"
+    ],
+    "3": [
+      "package",
+      "package_name",
+      "package_private",
+      "package_type",
+      "package_version"
+    ],
+    "4": [
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_preview"
+    ],
+    "5": [
+      "astro_config",
+      "package_dependencies_astro",
+      "ref_astro"
+    ],
+    "6": [
+      "package_dependencies",
+      "package_dependencies_fontsource_jetbrains_mono",
+      "ref_fontsource_jetbrains_mono"
+    ],
+    "7": [
+      "ref_astro_tsconfigs_base",
+      "tsconfig",
+      "tsconfig_extends"
+    ],
+    "8": [
+      "package_dependencies_fontsource_noto_serif_sc",
+      "ref_fontsource_noto_serif_sc"
+    ],
+    "9": [
+      "astro_types_d"
+    ],
+    "10": [
+      "src_env_d"
+    ]
+  },
+  "cohesion": {
+    "0": 0.4,
+    "1": 0.2857142857142857,
+    "2": 0.3333333333333333,
+    "3": 0.4,
+    "4": 0.5,
+    "5": 0.6666666666666666,
+    "6": 0.6666666666666666,
+    "7": 0.6666666666666666,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_pages_index_renderoverview",
+      "label": "renderOverview()",
+      "degree": 6
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 4
+    },
+    {
+      "id": "src_pages_index_esc",
+      "label": "esc()",
+      "degree": 4
+    },
+    {
+      "id": "src_pages_index_readcounts",
+      "label": "readCounts()",
+      "degree": 4
+    },
+    {
+      "id": "ref_fontsource_noto_sans_sc",
+      "label": "@fontsource/noto-sans-sc",
+      "degree": 3
+    },
+    {
+      "id": "ref_fontsource_noto_serif_sc",
+      "label": "@fontsource/noto-serif-sc",
+      "degree": 3
+    },
+    {
+      "id": "ref_astro",
+      "label": "astro",
+      "degree": 3
+    },
+    {
+      "id": "src_pages_index_num",
+      "label": "num()",
+      "degree": 3
+    },
+    {
+      "id": "src_pages_index_pick",
+      "label": "pick()",
+      "degree": 3
+    },
+    {
+      "id": "src_pages_index_tierchip",
+      "label": "tierChip()",
+      "degree": 3
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}
