@@ -1,0 +1,30 @@
+---
+// 知验台分发链介绍站骨架（Persuade 单页）。字体本地子集化（@fontsource），不依赖 Google Fonts。
+import "@fontsource/noto-serif-sc/400.css";
+import "@fontsource/noto-serif-sc/700.css";
+import "@fontsource/noto-sans-sc/400.css";
+import "@fontsource/noto-sans-sc/500.css";
+import "../styles/global.css";
+
+const { title = "知验台 bench · 知识沉淀 → 本体发布 → 柏讯消费" } = Astro.props;
+const desc =
+  "知验台（law-bench）把评测过的法律知识以本体形态版本化发布，柏讯（fd-wire）跨命名空间拉取落库——一条已上产的知识分发链。页面数字活拉自匿名概览端点并带 as_of，失败如实报因。";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bench.finddatatech.cloud/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
