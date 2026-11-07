@@ -23,9 +23,15 @@
 - 桌面 `h_overflow_px: 0`、移动 `h_overflow_px: 0`；标题串、报因卡、curl 片段（可横向滚动）、端点 chip（换行）复验通过。
 - 停轮：无第四轮。
 
+## 上产实绩（2026-11-07 补记）
+
+- **https://bench.finddatatech.cloud 已上产**：DNS 双 NS 103.236.89.212 ✅；雷池并入 site 31（10 站全 enabled 逐站探活绿）✅；证书 20 域 SAN 含 bench（POST cert 61 返回 data:61）✅；Caddy 静态 + 同源代理 ✅；SNI 验收 200 + 真实标题串 + body 13477B ✅；生产双视口截图 h_overflow=0 ✅
+- 门 B 文案已按 Facts 纪律微调：「匿名概览端点（上线中——端点未开放时下方概况带会如实报因）」
+- 同源代理现指 origin 30820（预留）：透传 404 = 报因卡实况（诚实链路工作正常）
+
 ## 挂账（如实）
 
-- 活水合真值渲染（版本表/计数/分层/as_of 与端点逐字段一致）待端点 live 后随 tasks 4.5 验收。
+- 活水合真值渲染（版本表/计数/分层/as_of 与端点逐字段一致）待 public pod 上产后随 tasks 4.5 验收（law-bench change `deploy-bench-public-api-pod` 已提案）。
 - OG 卡图（og-hero.png）尚未产出——上线前补（不影响功能验收）。
 - DNS/雷池/Caddy 上产链（tasks 4.1-4.5）未执行。
 
