@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Astro build output and generated types/cache
+dist/
+.astro/
+
+# Python tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# graphify CLI cache and generated knowledge graph (regenerate with `graphify update .`)
+graphify-out/
+
+# OS noise
+.DS_Store
