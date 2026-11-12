@@ -230,13 +230,21 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
           : '<span class="tier ' + kind + '">' + kind + " " + esc(v) + "</span>";
       }
 
+      // 叙事锚是**短锚**（8 位，见首屏 `legal v1 · digest 3586552a`），端点返回的是
+      // 64 位全串。全等比较永远不会成立，绿标与行高亮会结构性假死——2026-11-12 线上
+      // 实测 {live:0, anchorHit:0} 而表格已渲染。判据必须是"以短锚开头"。
+      function anchorMatches(digest) {
+        var d = String(digest || "").toLowerCase();
+        return d.length >= ANCHOR_DIGEST.length && d.indexOf(ANCHOR_DIGEST) === 0;
+      }
+
       function renderOverview(t) {
         var versions = Array.isArray(t.ontology_versions) ? t.ontology_versions : [];
         var rows = versions.map(function (v) {
           var c = readCounts(v.counts);
           var tiers =
             tierChip("gold", c.gold) + " " + tierChip("silver", c.silver) + " " + tierChip("bronze", c.bronze);
-          var matched = String(v.digest || "") === ANCHOR_DIGEST;
+          var matched = anchorMatches(v.digest);
           return (
             "<tr" + (matched ? ' class="anchor-hit"' : "") + ">" +
             '<td class="mono">' + esc(pick(v, "domain_key") || "—") + "</td>" +
@@ -268,7 +276,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
 
         // 签名运动「一锚贯之」：叙事锚 digest 与端点返回对上才亮，失败态两处都不亮
         var hit = versions.some(function (v) {
-          return String(v.digest || "") === ANCHOR_DIGEST;
+          return anchorMatches(v.digest);
         });
         if (hit && $node3) $node3.classList.add("live");
       }
