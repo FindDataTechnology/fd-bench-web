@@ -128,11 +128,12 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         <article class="eblock">
           <h3>语料底座</h3>
           <p>
-            法规目录 <data class="fact-num" value="32275">32,275</data> 部（as_of 2026-09 目录刷新），
-            合同条款语料 <data class="fact-num" value="43">43</data> 类（data/clause_seeds/）——
+            法规目录 <data class="fact-num" value="32296">32,296</data> 部（as_of 2026-11-12 现网
+            <code>law_catalog.laws</code>），合同 <data class="fact-num" value="66">66</data> 类母版模板、
+            其中 <data class="fact-num" value="41">41</data> 类带种子条款（<code>data/clause_seeds/</code>）——
             法条锚定，条级引用可定位。
           </p>
-          <small class="src-note">出处：law-bench/PRODUCT.md（32,275 laws at the 2026-09 refresh，repo-verified 2026-09-26）；law-bench/README.md 能力表（43 类中国合同种子条款）。</small>
+          <small class="src-note">出处：三数均现网/仓内实测（2026-11-12）——法规=<code>law_catalog.laws</code> 行数 32,296；母版=<code>list_contract_types()</code> 66 类；种子=<code>data/clause_seeds/*.yaml</code> 41 份。旧记「32,275（2026-09 刷新）」与「43 类」已随本轮订正。</small>
         </article>
         <article class="eblock">
           <h3>机器可及</h3>

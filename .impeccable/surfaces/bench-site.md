@@ -26,8 +26,8 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 
 **白名单**：
 
-1. **32,275 部法规**（bench 法规目录，2026-09 刷新）——出处 `law-bench/PRODUCT.md`（"A PRC statute law catalog (32,275 laws at the 2026-09 refresh)…repo-verified 2026-09-26"）。页面上 MUST 以 `<data value="32275">` + as_of 口径标注。
-2. **43 类合同**（条款语料库种子条款）——出处 `law-bench/README.md` §能力表（"43 类中国合同的种子条款（data/clause_seeds/）"）。
+1. **32,296 部法规**——出处=**现网库实测**（`law_catalog.laws` 行数，2026-11-12）；旧记 32,275 是 2026-09 刷新时的读数。页面上 MUST 以 `<data value="32296">` + as_of 口径标注。判据取样自现网，不取文档历史句。
+2. **66 类母版模板 / 其中 41 类带种子条款**——出处=`list_contract_types()` 实枚举 66 类、`data/clause_seeds/*.yaml` 实计 41 份（2026-11-12）。旧记「43 类」既非母版数也非种子数，已在站点与 README 一并订正。
 3. **54 个 MCP 工具**（bench MCP server）——出处：现网 `tools/list` 实枚举 54（2026-11-12 复核，registry `num_tools`=54 一致）；README 旧记 "advertises 37 tools" 已于同日订正。**判据取样自现网，不取 README 的历史句**——该句曾在 2026-11 前长期落后于实际工具面。
 4. **4 类知识资产**（① 本体 ② RAG 知识资产 ③ 评测资产（尺子）④ 微调数据）——出处 `law-bench/docs/knowledge-platform-blueprint.md` §二（"四类知识资产，一套内核"）。
 5. **legal v2 已发布，digest `5897354d`**（5,117 实体 / 25 关系；2026-11-12 由 `publish_domain` 追加，v1 保留）——出处=**现网 `/api/public/overview` 实测**（v1 `3586552a` 是 2026-11-06 的联调冒烟：1 个实体）。判据取样自现网，不取历史文档句。
