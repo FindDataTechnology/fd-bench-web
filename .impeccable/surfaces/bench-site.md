@@ -8,7 +8,7 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 
 **OWN-WORLD**: 证据台账的扉页（Evidence Ledger, title page）。承接 law-bench 工作台 `law-bench/DESIGN.md` 的材质语言并按 Persuade 面重述：Ledger Gray `#f6f7f9` 哑光纸底 + Panel White `#ffffff` + 1px Rule Gray `#e2e5ea` 全包边（No-Gloss Rule：零阴影零渐变零装饰）；单点强调 Bench Blue `#2563eb`；Verdict Green `#047857` / Objection Red `#dc2626` 只作状态；质量分层色票 gold `#92400e` / silver `#475569` / bronze `#7c2d12`（tint + 文字成对，沿 Tint Verdict Rule）。display=Noto Serif SC（扉页铅字感），body=Noto Sans SC，机器数据（digest/as_of/端点/表值）=JetBrains Mono。浏览器面（选区/caret/focus/下划线偏移/tabular-nums）全随这套色主题化。
 
-**STORY**: 访客（决策评估者 或 智能体开发者）第一眼看到层 0 论点，往下即**链路三节图**——① 知识沉淀（判官评审环迭代出的知识）→ ② 本体发布（版本化发布-拉取契约，节点内嵌 legal v1 digest `3586552a` 真证据锚）→ ③ 柏讯消费（跨命名空间拉取落库）——其下实时概况带当场验证②③：版本表 / 计数 / 分层分布 / as_of 全部活拉自匿名概览端点。签名运动「一锚贯之」：水合成功且 digest 对上时，链路节点与版本表同挂绿缘「live 对账一致」标。再往下：证据区（门 A 的资产/分层/评审环面，静态数字带 as_of 出处）→ 两扇门动作（门 A 回看证据面、门 B copy 端点 + curl 试令 + 认证说明）→ footer。边界如实：端点失败即报因卡，公开面只有概览窄口，全量访问需凭据。
+**STORY**: 访客（决策评估者 或 智能体开发者）第一眼看到层 0 论点，往下即**链路三节图**——① 知识沉淀（判官评审环迭代出的知识）→ ② 本体发布（版本化发布-拉取契约，节点内嵌 legal v2 digest `5897354d` 真证据锚）→ ③ 柏讯消费（跨命名空间拉取落库）——其下实时概况带当场验证②③：版本表 / 计数 / 分层分布 / as_of 全部活拉自匿名概览端点。签名运动「一锚贯之」：水合成功且 digest 对上时，链路节点与版本表同挂绿缘「live 对账一致」标。再往下：证据区（门 A 的资产/分层/评审环面，静态数字带 as_of 出处）→ 两扇门动作（门 A 回看证据面、门 B copy 端点 + curl 试令 + 认证说明）→ footer。边界如实：端点失败即报因卡，公开面只有概览窄口，全量访问需凭据。
 
 **FIRST VIEWPORT**: 满幅 Ledger Gray 哑光纸，顶部一句论点（无 kicker，标题自带铅字重量）+ 两行 lede。其下链路三节图（三张 Panel White 平卡，蓝色顶缘 + mono 节点号，②号卡内嵌 digest 证据锚 mono 小字块）。再下实时概况带：SSR 态仅「正在连接匿名概览端点…」一行 mono 状态（**无任何摆拍数字**），水合后渲染 stats 胶囊 + 版本表 + as_of。整屏不见一张图、一道渐变。
 
@@ -30,7 +30,7 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 2. **43 类合同**（条款语料库种子条款）——出处 `law-bench/README.md` §能力表（"43 类中国合同的种子条款（data/clause_seeds/）"）。
 3. **54 个 MCP 工具**（bench MCP server）——出处：现网 `tools/list` 实枚举 54（2026-11-12 复核，registry `num_tools`=54 一致）；README 旧记 "advertises 37 tools" 已于同日订正。**判据取样自现网，不取 README 的历史句**——该句曾在 2026-11 前长期落后于实际工具面。
 4. **4 类知识资产**（① 本体 ② RAG 知识资产 ③ 评测资产（尺子）④ 微调数据）——出处 `law-bench/docs/knowledge-platform-blueprint.md` §二（"四类知识资产，一套内核"）。
-5. **legal v1 已发布，digest `3586552a`**（C3 知识分发契约；wire 跨命名空间真拉落库幂等、投影可查，全链收口 2026-11-06）——出处 `law-bench/docs/knowledge-platform-blueprint.md` 分发链表 C3 行。
+5. **legal v2 已发布，digest `5897354d`**（5,117 实体 / 25 关系；2026-11-12 由 `publish_domain` 追加，v1 保留）——出处=**现网 `/api/public/overview` 实测**（v1 `3586552a` 是 2026-11-06 的联调冒烟：1 个实体）。判据取样自现网，不取历史文档句。
 6. **ontology-builder 五岗舰队**（本体盘账员 → 本体建模师 → 纪律校验闸 → 声明提案员 → 台账主编；wire-ops 工具全只读 + 提案制，人工确认后落库）——出处 `fleet-packs/blueprints/ontology-builder/blueprint.json`（五 agent title）+ `fleet-packs/README.md`（"五岗（盘账/建模/校验闸/提案/主编）…全只读+提案制"）。
 7. **判官评审环**（rubric × criteria 逐条判定 PASS/FAIL + 理由，多评审模型并行；自愈管线 `generate → fill → evaluate → improve` 迭代至达标）——出处 `law-bench/README.md` §能力表。
 8. **gold/silver/bronze 质量分层**与**版本化发布-拉取契约**（domain/version/digest/published_at/counts）——出处 `knowledge-platform-blueprint.md`（四类资产共享质量档位/发布机制）与 law-bench change `add-bench-public-overview-tier` spec（概览载荷字段口径）。

@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import sys
 import threading
 from functools import partial
@@ -29,9 +30,16 @@ from pathlib import Path
 DIST = Path(__file__).resolve().parent.parent / "dist"
 PORT = 8931
 
-ANCHOR_PREFIX = "3586552a"
-MATCHING_DIGEST = ANCHOR_PREFIX + "01b041b777db3dc6c5252b5a275c2c138395d6c4088c6025d4674203"
-OTHER_DIGEST = "ffffffff" + MATCHING_DIGEST[len(ANCHOR_PREFIX):]
+# 短锚**从源文件读**，不在这里再写一份：上一轮刚立的「判定逻辑只有一处」同样适用于检查
+# 脚本——否则发布换了锚，脚本还拿旧锚自证，绿得毫无意义（2026-11-12 legal v1→v2 实历）。
+_SRC = Path(__file__).resolve().parent.parent / "src" / "pages" / "index.astro"
+_m = re.search(r'const ANCHOR_DIGEST = "([0-9a-f]+)"', _SRC.read_text(encoding="utf-8"))
+if not _m:
+    raise SystemExit(f"在 {_SRC} 里找不到 ANCHOR_DIGEST")
+ANCHOR_PREFIX = _m.group(1)
+_REST = "0" * (64 - len(ANCHOR_PREFIX))
+MATCHING_DIGEST = ANCHOR_PREFIX + _REST
+OTHER_DIGEST = ("f" if ANCHOR_PREFIX[0] != "f" else "e") * len(ANCHOR_PREFIX) + _REST
 
 
 def _overview(digest: str) -> dict:

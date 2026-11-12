@@ -7,9 +7,9 @@
 //  - 概览端点未 live 前水合区以报因态呈现（诚实降级），文案不写完成态断言。
 import Layout from "../layouts/layout.astro";
 
-// C3 分发契约真证据锚（白名单事实 5：legal v1 已发布，2026-11-06 全链收口）。
+// C3 分发契约真证据锚（白名单事实 5：legal v2 已发布，2026-11-12；v1 为 2026-11-06 联调冒烟）。
 // 仅作叙事锚与签名运动「一锚贯之」的对账常量，不参与任何「实时数字」渲染。
-const ANCHOR_DIGEST = "3586552a";
+const ANCHOR_DIGEST = "5897354d";
 const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
 ---
 
@@ -52,7 +52,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         <p>柏讯以拉取客户端订阅发布面，真拉落库幂等、投影可查——第一个消费方，不是唯一。</p>
         <p class="anchor-line">
           <span class="tag">C3 知识分发契约 · 真证据（as_of 2026-11-06）</span>
-          legal v1 已发布 · digest <b>{ANCHOR_DIGEST}</b>
+          legal v2 已发布 · digest <b>{ANCHOR_DIGEST}</b>
         </p>
       </article>
     </section>
@@ -230,7 +230,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
           : '<span class="tier ' + kind + '">' + kind + " " + esc(v) + "</span>";
       }
 
-      // 叙事锚是**短锚**（8 位，见首屏 `legal v1 · digest 3586552a`），端点返回的是
+      // 叙事锚是**短锚**（8 位，见首屏 `legal v2 · digest 5897354d`），端点返回的是
       // 64 位全串。全等比较永远不会成立，绿标与行高亮会结构性假死——2026-11-12 线上
       // 实测 {live:0, anchorHit:0} 而表格已渲染。判据必须是"以短锚开头"。
       function anchorMatches(digest) {

@@ -29,7 +29,7 @@ bench（知验台）与柏讯本体在官网零存在——bench 只有一张 re
 
 ## Positioning
 
-邻品抄不走的机制：**这条链已经上产**。知识沉淀端是法条锚定的评测基座（32,275 部法规目录、43 类合同种子条款、判官评审环自愈迭代）；发布端是版本化发布-拉取契约（legal v1 已发布，digest `3586552a`）；消费端柏讯已跨命名空间真拉落库、幂等可查。结构装置「**链路三节图 + 实时概况带**」把「证据台账」从工作台内部语汇翻成对外可核对的门面——数字不是口号，是端点返回。
+邻品抄不走的机制：**这条链已经上产**。知识沉淀端是法条锚定的评测基座（32,275 部法规目录、43 类合同种子条款、判官评审环自愈迭代）；发布端是版本化发布-拉取契约（legal v2 已发布，digest `5897354d`，5,117 实体）；消费端柏讯已跨命名空间真拉落库、幂等可查。结构装置「**链路三节图 + 实时概况带**」把「证据台账」从工作台内部语汇翻成对外可核对的门面——数字不是口号，是端点返回。
 
 ## Operating Context
 
@@ -58,7 +58,7 @@ bench（知验台）与柏讯本体在官网零存在——bench 只有一张 re
 - 43 类合同种子条款（条款语料库 `data/clause_seeds/`，`law-bench/README.md`）。
 - 37 个 MCP 工具（`fd-coding-law-bench-mcp`，README「advertises 37 tools」）。
 - 4 类知识资产：本体 / RAG / 评测资产（尺子）/ 微调数据（`law-bench/docs/knowledge-platform-blueprint.md` §二）。
-- legal v1 已发布，digest `3586552a`，wire 跨 ns 真拉落库幂等（C3 `add-knowledge-distribution-contract` 全链收口 2026-11-06，`knowledge-platform-blueprint.md` 分发链表）。
+- legal v2 已发布，digest `5897354d`（5,117 实体 / 25 关系，2026-11-12）；v1 `3586552a` 为 2026-11-06 联调冒烟（1 实体），按追加式保留可取用。wire 跨 ns 真拉落库幂等（C3 `add-knowledge-distribution-contract`，`knowledge-platform-blueprint.md` 分发链表）。
 - ontology-builder 五岗舰队（本体盘账员 / 本体建模师 / 纪律校验闸 / 声明提案员 / 台账主编；wire-ops 全只读 + 提案制人工确认，`fleet-packs/blueprints/ontology-builder/blueprint.json` + `fleet-packs/README.md`）。
 - 判官评审环 `generate → fill → evaluate → improve` 自愈管线（`law-bench/README.md` §能力表）。
 
