@@ -137,10 +137,10 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         <article class="eblock">
           <h3>机器可及</h3>
           <p>
-            bench MCP server 对外提供 <data class="fact-num" value="37">37</data> 个工具（as_of 2026-11 README 口径），
+            bench MCP server 对外提供 <data class="fact-num" value="54">54</data> 个工具（as_of 2026-11-12 现网 <code>tools/list</code> 口径），
             覆盖语料检索、评测与本体面；发布面另有匿名概览窄口（见门 B）。
           </p>
-          <small class="src-note">出处：fd-coding-law-bench-mcp README（"The server advertises 37 tools"）。</small>
+          <small class="src-note">出处：现网 <code>tools/list</code> 实枚举 54（2026-11-12 复核）；README 旧记 37 已随本轮订正。</small>
         </article>
       </div>
     </section>
@@ -170,7 +170,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
           <pre class="snippet" aria-label="curl 试令">curl -fsS {ENDPOINT}</pre>
           <p class="auth-note">
             <b>认证口径：</b>概览端点匿名可读（设计契约已冻结，部署收尾中）；全量访问（语料正文、评测操作、本体全量拉取）需 API key，
-            或经 MCP 网关使用 bench MCP server 的 37 个工具——
+            或经 MCP 网关使用 bench MCP server 的 54 个工具（网关入口同样需凭据：匿名请求返回 <code>Authentication required</code>）——
             <a href="https://mcp.finddatatech.cloud" rel="noopener">mcp.finddatatech.cloud</a>。
           </p>
         </article>

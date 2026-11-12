@@ -28,7 +28,7 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 
 1. **32,275 部法规**（bench 法规目录，2026-09 刷新）——出处 `law-bench/PRODUCT.md`（"A PRC statute law catalog (32,275 laws at the 2026-09 refresh)…repo-verified 2026-09-26"）。页面上 MUST 以 `<data value="32275">` + as_of 口径标注。
 2. **43 类合同**（条款语料库种子条款）——出处 `law-bench/README.md` §能力表（"43 类中国合同的种子条款（data/clause_seeds/）"）。
-3. **37 个 MCP 工具**（bench MCP server）——出处 `law-bench/fd-coding-law-bench-mcp/README.md`（"The server advertises 37 tools"）。
+3. **54 个 MCP 工具**（bench MCP server）——出处：现网 `tools/list` 实枚举 54（2026-11-12 复核，registry `num_tools`=54 一致）；README 旧记 "advertises 37 tools" 已于同日订正。**判据取样自现网，不取 README 的历史句**——该句曾在 2026-11 前长期落后于实际工具面。
 4. **4 类知识资产**（① 本体 ② RAG 知识资产 ③ 评测资产（尺子）④ 微调数据）——出处 `law-bench/docs/knowledge-platform-blueprint.md` §二（"四类知识资产，一套内核"）。
 5. **legal v1 已发布，digest `3586552a`**（C3 知识分发契约；wire 跨命名空间真拉落库幂等、投影可查，全链收口 2026-11-06）——出处 `law-bench/docs/knowledge-platform-blueprint.md` 分发链表 C3 行。
 6. **ontology-builder 五岗舰队**（本体盘账员 → 本体建模师 → 纪律校验闸 → 声明提案员 → 台账主编；wire-ops 工具全只读 + 提案制，人工确认后落库）——出处 `fleet-packs/blueprints/ontology-builder/blueprint.json`（五 agent title）+ `fleet-packs/README.md`（"五岗（盘账/建模/校验闸/提案/主编）…全只读+提案制"）。
