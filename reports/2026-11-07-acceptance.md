@@ -25,7 +25,7 @@
 
 ## 上产实绩（2026-11-07 补记）
 
-- **https://bench.finddatatech.cloud 已上产**：DNS 双 NS 103.236.89.212 ✅；雷池并入 site 31（10 站全 enabled 逐站探活绿）✅；证书 20 域 SAN 含 bench（POST cert 61 返回 data:61）✅；Caddy 静态 + 同源代理 ✅；SNI 验收 200 + 真实标题串 + body 13477B ✅；生产双视口截图 h_overflow=0 ✅
+- **https://bench.finddatatech.cloud 已上产**：DNS 双 NS ✅；雷池并入 site 31（10 站全 enabled 逐站探活绿）✅；证书 20 域 SAN 含 bench（POST cert 61 返回 data:61）✅；Caddy 静态 + 同源代理 ✅；SNI 验收 200 + 真实标题串 + body 13477B ✅；生产双视口截图 h_overflow=0 ✅
 - 门 B 文案已按 Facts 纪律微调：「匿名概览端点（上线中——端点未开放时下方概况带会如实报因）」
 - 同源代理现指 origin 30820（预留）：透传 404 = 报因卡实况（诚实链路工作正常）
 

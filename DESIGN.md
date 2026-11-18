@@ -41,7 +41,7 @@
 版本表 domain/version/digest/published_at/counts 分层 + as_of；SSR 态仅「正在连接…」）→ 证据区
 （门 A：四类资产卡 + 质量分层 + 判官评审环 + 静态事实数字）→ 动作区两扇门（门 A 回看证据面 /
 门 B copy 端点 + curl 试令 + 认证说明）→ footer（认证口径与归属）。
-部署：cheap-1 `/opt/fd/bench-web/dist`（Caddy `file_server` + `handle /api/public/overview` 反代
+部署：一台 worker 节点上的 `/opt/fd/bench-web/dist`（Caddy `file_server` + `handle /api/public/overview` 反代
 公共 pod，超时 10s、失败透传非 200、不缓存；SafeLine 443 → Caddy，design D4 全链参数）。
 
 ## Verified
