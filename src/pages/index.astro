@@ -20,8 +20,8 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
       <h1>竞争不在模型，<br />在知识的沉淀与复利。</h1>
       <p class="lede">
         知验台（bench）在法条锚定的语料上评测知识，把评测出的知识以<b>本体</b>形态版本化发布；
-        柏讯（wire）跨命名空间拉取落库消费。<b>这条链已上产</b>——页面数字活拉自匿名概览端点并带
-        as_of，失败如实报因，不摆拍。
+        柏讯（wire）的消费端接入能力已交付（生产订阅尚未开启）。<b>沉淀与发布这一段在产</b>——
+        页面数字活拉自匿名概览端点并带 as_of，失败如实报因，不摆拍。
       </p>
     </section>
 
@@ -49,7 +49,10 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
       <article class="node" id="node-3">
         <span class="no">03 · 柏讯消费</span>
         <h2>跨命名空间落库</h2>
-        <p>柏讯以拉取客户端订阅发布面，真拉落库幂等、投影可查——第一个消费方，不是唯一。</p>
+        <p>
+          柏讯的消费端接入能力已交付：拉取客户端、本地快照落库（按 digest 幂等）、
+          只读投影三件齐备。生产订阅尚未开启——打开后按域定时拉最新发布版。
+        </p>
         <p class="anchor-line">
           <span class="tag">C3 知识分发契约 · 真证据（as_of 2026-11-06）</span>
           legal v2 已发布 · digest <b>{ANCHOR_DIGEST}</b>
