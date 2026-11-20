@@ -8,9 +8,9 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 
 **OWN-WORLD**: 证据台账的扉页（Evidence Ledger, title page）。承接 law-bench 工作台 `law-bench/DESIGN.md` 的材质语言并按 Persuade 面重述：Ledger Gray `#f6f7f9` 哑光纸底 + Panel White `#ffffff` + 1px Rule Gray `#e2e5ea` 全包边（No-Gloss Rule：零阴影零渐变零装饰）；单点强调 Bench Blue `#2563eb`；Verdict Green `#047857` / Objection Red `#dc2626` 只作状态；质量分层色票 gold `#92400e` / silver `#475569` / bronze `#7c2d12`（tint + 文字成对，沿 Tint Verdict Rule）。display=Noto Serif SC（扉页铅字感），body=Noto Sans SC，机器数据（digest/as_of/端点/表值）=JetBrains Mono。浏览器面（选区/caret/focus/下划线偏移/tabular-nums）全随这套色主题化。
 
-**STORY**: 访客（决策评估者 或 智能体开发者）第一眼看到层 0 论点，往下即**链路三节图**——① 知识沉淀（判官评审环迭代出的知识）→ ② 本体发布（版本化发布-拉取契约，节点内嵌 legal v2 digest `5897354d` 真证据锚）→ ③ 柏讯消费（跨命名空间拉取落库）——其下实时概况带当场验证②③：版本表 / 计数 / 分层分布 / as_of 全部活拉自匿名概览端点。签名运动「一锚贯之」：水合成功且 digest 对上时，链路节点与版本表同挂绿缘「live 对账一致」标。再往下：证据区（门 A 的资产/分层/评审环面，静态数字带 as_of 出处）→ 两扇门动作（门 A 回看证据面、门 B copy 端点 + curl 试令 + 认证说明）→ footer。边界如实：端点失败即报因卡，公开面只有概览窄口，全量访问需凭据。
+**STORY**: 访客（决策评估者 或 智能体开发者）第一眼看到层 0 论点，**同屏其下即「发布面 · 活拉」横幅**（`#hero-fact`：domain vN / digest 短锚 / as_of 三字段，与下方概况带共用同一次响应）——首屏就能核对一条真实事实，不滚动即可见。往下是**链路三节图**——① 知识沉淀（判官评审环迭代出的知识）→ ② 本体发布（版本化发布-拉取契约，节点内嵌 legal v2 digest `5897354d` 真证据锚）→ ③ 柏讯消费（跨命名空间拉取落库）——其下实时概况带当场验证②③：版本表 / 计数 / 分层分布 / as_of 全部活拉自匿名概览端点。签名运动「一锚贯之」：水合成功且 digest 对上时，链路节点与版本表同挂绿缘「live 对账一致」标。再往下：证据区（门 A 的资产/分层/评审环面，静态数字带 as_of 出处）→ 两扇门动作（门 A **进入工作台**（`lawbench.finddatatech.cloud/d`，标注「需登录」）+ 认证说明；门 B copy 端点 + curl 试令 + 认证说明）→ footer。边界如实：端点失败即报因卡（首屏横幅与概况带同时进入报因态），公开面只有概览窄口，全量访问需凭据。
 
-**FIRST VIEWPORT**: 满幅 Ledger Gray 哑光纸，顶部一句论点（无 kicker，标题自带铅字重量）+ 两行 lede。其下链路三节图（三张 Panel White 平卡，蓝色顶缘 + mono 节点号，②号卡内嵌 digest 证据锚 mono 小字块）。再下实时概况带：SSR 态仅「正在连接匿名概览端点…」一行 mono 状态（**无任何摆拍数字**），水合后渲染 stats 胶囊 + 版本表 + as_of。整屏不见一张图、一道渐变。
+**FIRST VIEWPORT**: 满幅 Ledger Gray 哑光纸，顶部一句论点（无 kicker，标题自带铅字重量）+ 两行 lede + **首屏活证据横幅**（左侧 Bench Blue 3px 竖缘，mono 字段，`min-height` 托底使加载中/成功/报因三态在等高区内替换，端点故障不塌版）。再下链路三节图（三张 Panel White 平卡，蓝色顶缘 + mono 节点号，②号卡内嵌 digest 证据锚 mono 小字块；卡间是 1px 连接线 + 线尾箭头，不是飘在空白里的字符）。再下实时概况带：SSR 态仅「正在连接匿名概览端点…」一行 mono 状态（**无任何摆拍数字**），水合后渲染 stats 胶囊 + 版本表 + as_of。整屏不见一张图、一道渐变。
 
 **FORM**: 证据台账的扉页 — code-led（材质语言从 law-bench 工作台既有 design system 承接，无图像生成，无 comp）。
 

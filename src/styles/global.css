@@ -92,6 +92,57 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 24px 88px; }
 }
 .hero .lede b { color: var(--ink); font-weight: 500; }
 
+/* ── 首屏活证据横幅 ──
+   首屏只放最不可伪造的三个字段（domain/version、digest 短锚、as_of）。
+   min-height 托底：加载中 / 成功 / 报因三态在同一高度内替换，端点故障不塌版。 */
+.hero-fact {
+  margin-top: 30px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--blue);
+  background: var(--panel);
+  padding: 14px 18px;
+  max-width: 62ch;
+  /* 三态等高：加载中 / 成功 / 报因共用同一高度，端点故障时首屏不塌版（design D3）。
+     成功态的四个字段会自动换行成两行，高度按最多行数定。 */
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.hero-fact-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.hero-fact-line {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.9;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 18px;
+  font-variant-numeric: tabular-nums;
+}
+.hero-fact-k { color: var(--muted); white-space: nowrap; }
+.hero-fact-k b { color: var(--ink); font-weight: 500; }
+.hero-fact-pending { color: var(--muted); font-size: 0.82rem; }
+.hero-fact-ok { color: var(--green); white-space: nowrap; }
+.hero-fact-ok::before { content: "* "; }
+.hero-fact-note { color: var(--muted); font-size: 0.76rem; }
+.hero-fact-fail {
+  color: var(--red);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .hero-fact { max-width: none; min-height: 140px; }
+  .hero-fact-line { font-size: 0.78rem; }
+}
+
 /* ── 链路三节 ── */
 .chain {
   display: grid;
@@ -103,9 +154,27 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 24px 88px; }
 .chain .arrow {
   align-self: center;
   font-family: var(--mono);
-  color: var(--muted);
-  font-size: 1.3rem;
+  color: var(--rule);
+  font-size: 0;
   user-select: none;
+  position: relative;
+  width: 100%;
+  min-width: 28px;
+  height: 1px;
+  background: var(--rule);
+}
+/* 连接线：一条 1px 横线 + 线尾箭头，把三节从「三张并列的卡」变成「一条链」。 */
+.chain .arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  transform: translateY(-50%) rotate(45deg);
+  transform-origin: right center;
 }
 .node {
   border: 1px solid var(--rule);
@@ -146,7 +215,23 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 24px 88px; }
 .node .anchor-line b { color: var(--ink); font-weight: 500; }
 @media (max-width: 860px) {
   .chain { grid-template-columns: 1fr; }
-  .chain .arrow { transform: rotate(90deg); justify-self: center; }
+  /* 纵向堆叠时连接线改为竖线（宽 1px / 高 28px），箭头朝下。 */
+  .chain .arrow {
+    width: 1px;
+    height: 28px;
+    min-width: 0;
+    min-height: 0;
+    justify-self: center;
+    align-self: center;
+  }
+  .chain .arrow::after {
+    right: auto;
+    bottom: 0;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+    transform-origin: center;
+  }
 }
 
 /* ── 实时概况带（水合数据区） ── */
@@ -191,6 +276,8 @@ table.versions td {
 table.versions td.mono { font-family: var(--mono); font-size: 0.8rem; overflow-wrap: anywhere; }
 /* 签名运动「一锚贯之」的表侧：digest 与叙事锚对上的行挂绿缘，与链路③节点 live 标同亮 */
 table.versions tr.anchor-hit td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+/* 分层色票：tint 底 + 文字成对出现（沿 DESIGN.md Tint Verdict Rule）。
+   版本表内是行内紧凑形态，证据区是色块形态（见下方 .tierline .tier）。 */
 .tier {
   display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--mono); font-size: 0.76rem;
@@ -199,6 +286,18 @@ table.versions tr.anchor-hit td:first-child { box-shadow: inset 3px 0 0 var(--gr
 .tier.gold { --sw: var(--gold); color: var(--gold); }
 .tier.silver { --sw: var(--silver); color: var(--silver); }
 .tier.bronze { --sw: var(--bronze); color: var(--bronze); }
+
+/* 证据区的分层色块：tint 底 + 深色文字，不再只是一个 8px 小点。 */
+.tierline .tier {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.tierline .tier::before { display: none; }
+.tierline .tier.gold { background: var(--gold-tint); }
+.tierline .tier.silver { background: var(--silver-tint); }
+.tierline .tier.bronze { background: var(--bronze-tint); }
 
 /* 报因卡（失败如实降级，不摆拍不回退） */
 .fail-card {
@@ -313,6 +412,15 @@ table.versions tr.anchor-hit td:first-child { box-shadow: inset 3px 0 0 var(--gr
 .btn.ghost { background: transparent; color: var(--blue); }
 .btn.ghost:hover { background: var(--nested); }
 .btn.copied { background: var(--green); border-color: var(--green); }
+/* 「需登录」标注：紧贴入口按钮，不让人误以为工作台是匿名可读的。 */
+.login-note {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
 .auth-note {
   font-size: 0.82rem; color: var(--muted);
   border-left: 3px solid var(--rule); padding-left: 12px; margin: 16px 0 0;
@@ -325,6 +433,9 @@ footer {
   color: var(--muted); font-size: 0.82rem;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
 }
+footer .filing { flex-basis: 100%; font-family: var(--mono); font-size: 0.72rem; opacity: 0.85; }
+footer .filing a { color: inherit; text-underline-offset: 3px; }
+
 footer .mono { font-family: var(--mono); font-size: 0.76rem; }
 
 /* 唯一签名运动：水合成功后，链路③柏讯消费节点与版本表 legal 行同挂「live 锚」蓝标，

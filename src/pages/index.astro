@@ -4,25 +4,37 @@
 //  - 实时概况带数字 MUST 活拉自同源匿名概览端点 /api/public/overview；失败如实报因，
 //    不回退旧值、不摆拍、不做 localStorage 缓存（首查与「缓存命中」无两口径）。
 //  - 静态事实数字全部在 Facts 白名单内（出处见 bench-site.md），以 <data> + as_of 口径标注。
-//  - 概览端点未 live 前水合区以报因态呈现（诚实降级），文案不写完成态断言。
+//  - 首屏「活证据横幅」（#hero-fact）与概况带共用同一次端点响应，不另开取数路径（design D2）。
 import Layout from "../layouts/layout.astro";
 
 // C3 分发契约真证据锚（白名单事实 5：legal v2 已发布，2026-11-12；v1 为 2026-11-06 联调冒烟）。
 // 仅作叙事锚与签名运动「一锚贯之」的对账常量，不参与任何「实时数字」渲染。
 const ANCHOR_DIGEST = "5897354d";
 const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
+// 工作台（运营台）入口。匿名访问实测 302 → 登录页，所以页面上必须同时标注「需登录」。
+const WORKBENCH = "https://lawbench.finddatatech.cloud/d";
 ---
 
 <Layout>
   <main>
-    <!-- ── 首屏：层 0 论点（task 2.1） ── -->
+    <!-- ── 首屏：层 0 论点 ── -->
     <section class="hero">
       <h1>竞争不在模型，<br />在知识的沉淀与复利。</h1>
       <p class="lede">
         知验台（bench）在法条锚定的语料上评测知识，把评测出的知识以<b>本体</b>形态版本化发布；
         柏讯（wire）跨命名空间拉取落库消费——<b>这条链已在产运行</b>，按域定时拉取、
-        失败如实记录。页面数字活拉自匿名概览端点并带 as_of，失败如实报因，不摆拍。
+        失败如实记录。
       </p>
+
+      <!-- 首屏活证据横幅（design D1/D2/D3）：只放最不可伪造的三个字段——as_of、版本号、
+           digest 短锚。与下方概况带共用同一次响应（一份数据渲染两处），不另开取数路径；
+           固定最小高度，端点故障时在等高区内换成报因态，首屏不塌版。 -->
+      <div class="hero-fact" id="hero-fact" aria-live="polite">
+        <span class="hero-fact-label">发布面 · 活拉</span>
+        <p class="hero-fact-line" id="hero-fact-line">
+          <span class="hero-fact-pending">正在连接匿名概览端点…</span>
+        </p>
+      </div>
     </section>
 
     <!-- ── 链路三节图（task 2.1）：① 沉淀 → ② 发布 → ③ 消费，③ 锚 C3 digest 真证据 ── -->
@@ -162,9 +174,16 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
           <h3>核对证据，再下判断</h3>
           <p>
             证据面就在上方：四类资产、质量分层、评审环与语料底座，每个数字带 as_of 与出处；
-            发布面的活数字以端点 as_of 为准，两处口径不混。
+            发布面的活数字以端点 as_of 为准，两处口径不混。要看到每个域的实际进度、质量比与
+            已发布版本，进工作台。
           </p>
-          <a class="btn ghost" href="#evidence">回看证据面</a>
+          <div class="endpoint-row">
+            <a class="btn" href={WORKBENCH}>进入工作台</a>
+            <span class="login-note">需登录</span>
+          </div>
+          <p class="auth-note">
+            工作台按域隔离、按角色授权（标注 / 编辑 / 负责人三档），未登录访问会转到登录页。
+          </p>
         </article>
         <article class="door">
           <span class="who">DOOR B · 智能体开发者</span>
@@ -187,6 +206,10 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
     <footer>
       <span>知验台 bench · 寻数旗下识律线 —— 评测出知识，以本体发布，供多端消费。</span>
       <span class="mono">bench.finddatatech.cloud</span>
+      <span class="filing">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">粤ICP备2026118740号-1</a> ·
+        <a href="https://beian.mps.gov.cn/#/query/webSearch?code=44030002016558" target="_blank" rel="noopener noreferrer">粤公网安备44030002016558号</a>
+      </span>
     </footer>
   </main>
 
@@ -204,6 +227,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
       var $data = document.getElementById("overview-data");
       var $asof = document.getElementById("asof");
       var $node3 = document.getElementById("node-3");
+      var $heroLine = document.getElementById("hero-fact-line");
 
       function esc(s) {
         return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
@@ -281,11 +305,39 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         $data.innerHTML = '<div class="stats">' + chips + "</div>" + table;
         $asof.textContent = "as_of " + (pick(t, "as_of") || "未取得") + " · 取自实时概览端点，非本页硬编";
 
+        // 首屏横幅与概况带共用这一份 t（design D2）：同一响应渲染两处，不存在两处各自取数。
+        renderHeroFact(versions, pick(t, "as_of"));
+
         // 签名运动「一锚贯之」：叙事锚 digest 与端点返回对上才亮，失败态两处都不亮
         var hit = versions.some(function (v) {
           return anchorMatches(v.digest);
         });
         if (hit && $node3) $node3.classList.add("live");
+      }
+
+      // 首屏活证据：只显示 as_of / 版本号 / digest 短锚三个字段（design D1）。
+      // 内容长度不一时固定高度托底，避免换行数变化把首屏撑跳（design D3）。
+      function renderHeroFact(versions, asof) {
+        if (!$heroLine) return;
+        if (!versions.length) {
+          $heroLine.innerHTML =
+            '<span class="hero-fact-pending">端点可达，但没有已发布版本。</span>';
+          return;
+        }
+        var v = versions[0];
+        var digest = String(pick(v, "digest") || "");
+        var shortDigest = digest ? digest.slice(0, ANCHOR_DIGEST.length) : "—";
+        var domain = pick(v, "domain_key") || "—";
+        var version = pick(v, "version");
+        var matched = anchorMatches(digest);
+        $heroLine.innerHTML =
+          '<span class="hero-fact-k">' + esc(domain) +
+          (version != null ? " v" + esc(version) : "") + "</span>" +
+          '<span class="hero-fact-k">digest <b>' + esc(shortDigest) + "</b></span>" +
+          '<span class="hero-fact-k">as_of <b>' + esc(asof || "未取得") + "</b></span>" +
+          (matched
+            ? '<span class="hero-fact-ok">live 对账一致</span>'
+            : '<span class="hero-fact-note">（未与叙事锚对上）</span>');
       }
 
       function renderFail(status, reason) {
@@ -299,6 +351,12 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
           "<p>本页不摆拍：概况带只渲染端点真响应。" + esc(reason || "原因未说明。") + "</p>" +
           "</div>";
         $asof.textContent = "as_of 未取得 · 端点未返回有效数据";
+        // 首屏同一份失败如实上报，不在这里编一个「一切正常」的旁白（design D3）。
+        if ($heroLine) {
+          $heroLine.innerHTML =
+            '<span class="hero-fact-fail">' + head +
+            " · " + esc(reason || "原因未说明。") + "</span>";
+        }
       }
 
       fetch(PATH, { headers: { Accept: "application/json" } })
