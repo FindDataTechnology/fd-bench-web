@@ -35,6 +35,13 @@ const WORKBENCH = "https://lawbench.finddatatech.cloud/d";
           <span class="hero-fact-pending">正在连接匿名概览端点…</span>
         </p>
       </div>
+
+      <!-- 首屏动作（critique 2026-11-20：首屏此前零可点元素，论点与证据都在却无处可去）。
+           给两类访客各一个直达：核对端点 / 进工作台。不重复门 B 的完整说明，只做入口。 -->
+      <p class="hero-actions">
+        <a class="btn" href={ENDPOINT}>查看端点原始响应</a>
+        <a class="btn ghost" href={WORKBENCH}>进入工作台 <span class="login-note-inline">需登录</span></a>
+      </p>
     </section>
 
     <!-- ── 链路三节图（task 2.1）：① 沉淀 → ② 发布 → ③ 消费，③ 锚 C3 digest 真证据 ── -->

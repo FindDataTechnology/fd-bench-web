@@ -138,6 +138,21 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 24px 88px; }
   font-size: 0.82rem;
   overflow-wrap: anywhere;
 }
+/* 首屏动作行：论点 + 活证据之后紧跟两个直达入口，不让访客滚到页尾才找到下一步。 */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0 0;
+}
+.login-note-inline {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.btn.ghost .login-note-inline { color: var(--muted); }
 @media (max-width: 560px) {
   .hero-fact { max-width: none; min-height: 140px; }
   .hero-fact-line { font-size: 0.78rem; }
