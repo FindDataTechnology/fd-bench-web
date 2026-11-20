@@ -1,0 +1,41 @@
+name: build-check
+
+# 本仓第一条 CI。门只有两条：构建 + 事实闸。
+# 刻意不并入 scripts/check_status_wording.py：它要出网到境内站点，GitHub runner 的网络
+# 抖动会让「网络失败」变成「构建失败」，最后门会被人 || true 绕过（design D4）。
+# 端点陈述的判定是上产前手跑的一次性动作，输出写进验收报告。
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Fact gate (whitelist + retired values)
+        run: python3 scripts/check_facts.py
+
+      - name: Gate self-check (判据本身必须双向有效)
+        run: python3 scripts/check_facts.py --self-check
+
+      - name: Guard — the fact gate must stay wired
+        # 门被删掉/改名后，上面的 step 会失败；但也可能有人把 step 整段删了而 workflow 仍绿。
+        # 判据必须比「文件里出现过 check_facts.py」更严——守卫那一行自己就含这个字符串，
+        # 自匹配会让守卫恒真。这里精确匹配 gate step 的 run 行本身。
+        run: |
+          grep -qxF "        run: python3 scripts/check_facts.py" .github/workflows/build-check.yml \
+            || { echo "::error::fact gate step 已从 workflow 中移除"; exit 1; }

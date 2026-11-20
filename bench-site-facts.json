@@ -1,0 +1,43 @@
+{
+  "$comment": "知验台站点事实白名单——页面事实性数字的唯一机器源。scripts/check_facts.py 每次构建读取本文件；.impeccable/surfaces/bench-site.md 的 Facts 段只描述叙事与圈禁，不再复述数字。退役值优先判定：任何 retired.text 在产物中出现即构建失败。",
+  "facts": [
+    {
+      "id": "law-catalog",
+      "value": 32296,
+      "text": "32,296",
+      "source": "现网 law_catalog.laws 行数（法律目录）",
+      "as_of": "2026-11-12"
+    },
+    {
+      "id": "contract-masters",
+      "value": 66,
+      "text": "66",
+      "source": "list_contract_types() 实枚举（合同母版模板类数）",
+      "as_of": "2026-11-12"
+    },
+    {
+      "id": "contract-seeds",
+      "value": 41,
+      "text": "41",
+      "source": "data/clause_seeds/*.yaml 实计（带种子条款的母版类数）",
+      "as_of": "2026-11-12"
+    },
+    {
+      "id": "mcp-tools",
+      "value": 54,
+      "text": "54",
+      "source": "现网 MCP tools/list 实枚举",
+      "as_of": "2026-11-12"
+    }
+  ],
+  "retired": [
+    { "text": "32,275", "why": "2026-09 目录刷新旧读数，2026-11-12 订正为 32,296" },
+    { "text": "32275", "why": "同上，无千分位形态" },
+    { "text": "43 类", "why": "既非母版数（66）也非种子数（41），2026-11-12 订正" },
+    { "text": "37 个工具", "why": "MCP 工具数旧记，现网 tools/list 为 54" }
+  ],
+  "status_wording": {
+    "$comment": "端点状态陈述的禁用语。端点实测可用期间页面上不得出现这些过渡语；回落时按 requirement 改回能力口径（见 scripts/check_status_wording.py）。",
+    "forbidden_while_live": ["上线中", "部署收尾中"]
+  }
+}

@@ -4,11 +4,12 @@ file:// load so hydration hits the same-origin /api/public/overview and lands
 in the honest report-cause state while the endpoint is not live. Asserts:
 non-empty body, expected title, degrade card visible, localStorage API unused.
 """
-import asyncio, json, sys
+import asyncio, json, os, sys
 from pathlib import Path
 from playwright.async_api import async_playwright
 
-DIST = "http://localhost:8899/"
+# SITE_BASE 可覆盖：8899 上常有别的本地服务，撞端口时换个口起 http.server 即可。
+DIST = os.environ.get("SITE_BASE", "http://localhost:8899/")
 OUT = Path("/Users/chengsishi/finddata/fd-bench-web/.impeccable/review")
 
 SHOTS = [("desktop", 1280, 900), ("mobile", 390, 844)]

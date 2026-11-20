@@ -24,11 +24,16 @@ Mode: **Persuade**（一条已上产分发链的门面；访客决定并行动�
 
 ## Facts (claims binding — 每条有名有姓，白名单外数字拒绝上页)
 
-**白名单**：
+**白名单（数字的唯一机器源是 [`bench-site-facts.json`](../../bench-site-facts.json)，本节不再复述数字）**：
 
-1. **32,296 部法规**——出处=**现网库实测**（`law_catalog.laws` 行数，2026-11-12）；旧记 32,275 是 2026-09 刷新时的读数。页面上 MUST 以 `<data value="32296">` + as_of 口径标注。判据取样自现网，不取文档历史句。
-2. **66 类母版模板 / 其中 41 类带种子条款**——出处=`list_contract_types()` 实枚举 66 类、`data/clause_seeds/*.yaml` 实计 41 份（2026-11-12）。旧记「43 类」既非母版数也非种子数，已在站点与 README 一并订正。
-3. **54 个 MCP 工具**（bench MCP server）——出处：现网 `tools/list` 实枚举 54（2026-11-12 复核，registry `num_tools`=54 一致）；README 旧记 "advertises 37 tools" 已于同日订正。**判据取样自现网，不取 README 的历史句**——该句曾在 2026-11 前长期落后于实际工具面。
+> 白名单 #1–#3 的取值、来源与 `as_of` 全部登记在 `bench-site-facts.json` 的 `facts` 数组；
+> 这组数字的退役旧值登记在同文件的 `retired` 数组。两者由 `scripts/check_facts.py` 在每次
+> 构建时对 `dist/` 全量判定——白名单外数字与退役值命中都让构建失败。改数字只改 JSON，
+> 不在本文件与页面分别复述（此前首屏与证据区各自复述同一个计数，结果一处被订正、另一处长期留着旧值）。
+
+1. **法规目录计数**——出处与口径见 `bench-site-facts.json` `facts[id=law-catalog]`；页面 MUST 以 `<data value="…">` + `as_of` 标注。判据取样自现网，不取文档历史句。
+2. **合同母版 / 带种子条款计数**——两个口径分别登记在 `facts[id=contract-masters]` 与 `facts[id=contract-seeds]`；两者 MUST 分开标注，不得用一个数字含混指代。
+3. **MCP 工具数**——出处与口径见 `facts[id=mcp-tools]`（现网 `tools/list`，不取 README 历史句）。
 4. **4 类知识资产**（① 本体 ② RAG 知识资产 ③ 评测资产（尺子）④ 微调数据）——出处 `law-bench/docs/knowledge-platform-blueprint.md` §二（"四类知识资产，一套内核"）。
 5. **legal v2 已发布，digest `5897354d`**（5,117 实体 / 25 关系；2026-11-12 由 `publish_domain` 追加，v1 保留）——出处=**现网 `/api/public/overview` 实测**（v1 `3586552a` 是 2026-11-06 的联调冒烟：1 个实体）。判据取样自现网，不取历史文档句。
 6. **ontology-builder 五岗舰队**（本体盘账员 → 本体建模师 → 纪律校验闸 → 声明提案员 → 台账主编；wire-ops 工具全只读 + 提案制，人工确认后落库）——出处 `fleet-packs/blueprints/ontology-builder/blueprint.json`（五 agent title）+ `fleet-packs/README.md`（"五岗（盘账/建模/校验闸/提案/主编）…全只读+提案制"）。

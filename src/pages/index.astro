@@ -31,9 +31,12 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         <span class="no">01 · 知识沉淀</span>
         <h2>评测出的知识</h2>
         <p>
-          32,275 部法规目录、43 类合同种子条款之上，判官评审环
+          <data class="fact-num" value="32296">32,296</data> 部法规目录、
+          <data class="fact-num" value="66">66</data> 类合同母版模板（其中
+          <data class="fact-num" value="41">41</data> 类带种子条款）之上，判官评审环
           （rubric × criteria）驱动 <span class="fact-num">generate → fill → evaluate → improve</span>
           自愈迭代——知识不是攒出来的，是被评测磨出来的。
+          <small class="src-note">as_of 2026-11-12 · 取样自现网 <code>law_catalog.laws</code> 行数与 <code>data/clause_seeds/</code>（同证据区口径）。</small>
         </p>
       </article>
       <span class="arrow" aria-hidden="true">→</span>
@@ -136,7 +139,7 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
             其中 <data class="fact-num" value="41">41</data> 类带种子条款（<code>data/clause_seeds/</code>）——
             法条锚定，条级引用可定位。
           </p>
-          <small class="src-note">出处：三数均现网/仓内实测（2026-11-12）——法规=<code>law_catalog.laws</code> 行数 32,296；母版=<code>list_contract_types()</code> 66 类；种子=<code>data/clause_seeds/*.yaml</code> 41 份。旧记「32,275（2026-09 刷新）」与「43 类」已随本轮订正。</small>
+          <small class="src-note">出处：三数均现网/仓内实测（2026-11-12）——法规=<code>law_catalog.laws</code> 行数；母版=<code>list_contract_types()</code> 枚举；种子=<code>data/clause_seeds/*.yaml</code> 计数。三者的取值与 as_of 登记在 <code>bench-site-facts.json</code>，构建期由事实闸全量判定（旧读数与其同义旧措辞列入退役值集合，命中即构建失败）。</small>
         </article>
         <article class="eblock">
           <h3>机器可及</h3>
@@ -166,14 +169,14 @@ const ENDPOINT = "https://bench.finddatatech.cloud/api/public/overview";
         <article class="door">
           <span class="who">DOOR B · 智能体开发者</span>
           <h3>当场接一次端点</h3>
-          <p>匿名概览端点（上线中——端点未开放时下方概况带会如实报因），无需凭据，返回已发布本体版本、计数、分层分布与 as_of：</p>
+          <p>匿名概览端点已上线、无需凭据，返回已发布本体版本、计数、分层分布与 as_of。下方概况带即为该端点的实时响应；端点不可用时它会如实报因（状态码 + 原因），不摆拍：</p>
           <div class="endpoint-row">
             <code class="endpoint-chip" id="endpoint-chip">{ENDPOINT}</code>
             <button class="btn" type="button" id="copy-btn" data-endpoint={ENDPOINT}>复制端点</button>
           </div>
           <pre class="snippet" aria-label="curl 试令">curl -fsS {ENDPOINT}</pre>
           <p class="auth-note">
-            <b>认证口径：</b>概览端点匿名可读（设计契约已冻结，部署收尾中）；全量访问（语料正文、评测操作、本体全量拉取）需 API key，
+            <b>认证口径：</b>概览端点匿名可读（已上线，实测 200）；全量访问（语料正文、评测操作、本体全量拉取）需 API key，
             或经 MCP 网关使用 bench MCP server 的 54 个工具（网关入口同样需凭据：匿名请求返回 <code>Authentication required</code>）——
             <a href="https://mcp.finddatatech.cloud" rel="noopener">mcp.finddatatech.cloud</a>。
           </p>
