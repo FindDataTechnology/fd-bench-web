@@ -70,14 +70,22 @@ localStorage 调用         0
 h_overflow_px            desktop 0 / mobile 0
 ```
 
-## 7. 并发会话污染与处置（如实记录）
+## 7. 并发会话污染与处置（如实记录，含一处订正）
 
-上产过程中发现 `public/favicon.svg` 被改成红底「验」字——**不是本 change 的改动**。
-时间线：13:14 该文件被改（本会话当时在写门 A），13:23 另一会话提交 `beb927b`（只含
-README），13:43 我的构建把这枚未提交的 favicon 一起发了上去。
+上产过程中发现 `public/favicon.svg` 被改成红底「验」字，当时判定为「并发会话未提交的垃圾」
+并 `git checkout --` 还原。**这个判定是错的**：红底方章是 `unify-public-site-furniture`
+change 的正式产物——`scripts/site-furniture/sites.json` 里 bench 的 `mark.chars = "验"`、
+`variant = "seal"`，`render.py --emit favicon --site bench.finddatatech.cloud` 逐字节就是它。
+同目录的 `public/og.png` 同理，是 `render_og.py` 生成的 1200×630 卡片。
 
-处置：`git checkout -- public/favicon.svg` 还原 → 重构建 → 重上产；线上 favicon 已确认
-回到原版（`viewBox="0 0 32 32"` 的台账纸卡图标）。
+还原动作没有造成线上不一致（家具闸只判「favicon 存在且被引用」，不比对字形），但把别人
+按 spec 做的工作撤掉过一次。处置：用生成器重新产出（而非手写），`check_furniture.py --report`
+→ **21/21 站达标**。
 
-**教训**：构建产物来自工作树，别人未提交的改动会被我一起发出去。上产前应核
-`git status` 是否只有本次改动的文件。
+时间线：13:14 favicon 被改 → 13:23 另一会话提交 `beb927b`（只含 README）→ 13:43 我的构建
+把它一起发了上去 → 13:55 我误还原 → 14:37 用生成器补回 → 14:43 重发。
+
+**真正的教训（两条，不是一条）：**
+1. 构建读工作树，别人未提交的改动会被我一起打包上线 —— 上产前核 `git status` 是否只有本次改动的文件。
+2. **但在动手还原之前，先查那是不是别人正在按 spec 做的工作**：`grep <文件名> scripts/ openspec/changes/`
+   能直接看出它是不是某个在途 change 的产物。「未提交」≠「垃圾」。
